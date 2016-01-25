@@ -12,8 +12,14 @@ module.exports = function (u, cb) {
     
     var ready = false;
     var buffer = [];
+
+    var options = {};
+
+    if (window.WebSocket) {
+        options.transports = ["websocket"]
+    }
     
-    var sock = sockjs(uri);
+    var sock = sockjs(uri, null, options);
     stream.sock = sock;
     
     stream.write = function (msg) {
